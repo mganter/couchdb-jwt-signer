@@ -1,4 +1,5 @@
 # JWT-Signer using CouchDB users database
+![Docker](https://github.com/mganter/couchdb-jwt-signer/workflows/Docker/badge.svg)
 
 This application uses the couchdb users database to sign JWTs.
 
