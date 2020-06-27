@@ -1,0 +1,24 @@
+name: couch-jwt-signer
+selection_labels:
+  app: couch-jwt-signer
+replicas: 2
+env:
+  couchUserDB: "http://localhost:5984/_users"
+  secret: "myverycoolsecrettosigntokenswith"
+  token_timeout: "86400"
+  token_path: "/auth/token"
+labels:
+image:
+  repository:
+  tag:
+
+service:
+  port: 8080
+
+ingress:
+  enabled: false
+  host: your-domain.com
+  annotations:
+  tls:
+    enabled: false
+    secretName: my-tls-secret

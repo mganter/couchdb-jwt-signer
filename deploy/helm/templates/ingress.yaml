@@ -1,0 +1,25 @@
+{{- if eq .Values.ingress.enabled true }}
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  {{- with .Values.ingress.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+  name: {{ .Values.name }}-ingress
+spec:
+  rules:
+  - host: {{ .Values.ingress.host }}
+    http:
+      paths:
+      - backend:
+          serviceName: {{ .Values.service.name }}
+          servicePort: {{ .Values.service.port }}
+        path: {{ .Values.env.token_path }}
+  {{- if eq .Values.ingress.tls.enabled true }}
+  tls:
+  - hosts:
+    - {{ .Values.ingress.host }}
+    secretName: {{ .Values.ingress.tls.secretName }}
+  {{- end }}
+{{- end }}

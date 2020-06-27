@@ -1,0 +1,9 @@
+apiVersion: v2
+name: couch-jwt-signer
+description: This chart deploys a couch-jwt-signer.
+
+type: application
+
+version: 0.1.0
+
+appVersion: 0.1.0
