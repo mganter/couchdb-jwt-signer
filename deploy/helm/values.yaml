@@ -1,19 +1,32 @@
-name: couch-jwt-signer
-selection_labels:
-  app: couch-jwt-signer
-replicas: 2
-env:
-  couchUserDB: "http://localhost:5984/_users"
-  secret: "myverycoolsecrettosigntokenswith"
-  token_timeout: "86400"
-  token_path: "/auth/token"
-labels:
-image:
-  repository:
-  tag:
+## Deployment properties
+deployment:
+  name: couch-jwt-signer
+  selection_labels:
+    app: couch-jwt-signer
+  replicas: 2
+  env:
+    couchUserDB: "http://couchdb:5984/_users"
+    secret: "myverycoolsecrettosigntokenswith"
+    token_timeout: "86400"
+    token_path: "/auth/token"
+  labels:
+  image:
+    repository: docker.pkg.github.com/mganter/couchdb-jwt-signer/couch-jwt-signer
+    tag: latest
 
 service:
+  name: couch-jwt-signer
   port: 8080
+
+serviceAccount:
+  enabled: true
+  name: couchdb-jwt-signer
+  pullSecret:
+    enabled: true
+    secretName: regcred
+    registry: docker.pkg.github.com
+    username: user
+    password: password
 
 ingress:
   enabled: false

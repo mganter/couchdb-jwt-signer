@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.name }}
+  name: {{ .Values.service.name }}
 spec:
   selector:
-    {{- with .Values.selection_labels }}
+    {{- with .Values.deployment.selection_labels }}
     {{- toYaml . | nindent 4 }}
     {{- end }}
   ports:

@@ -1,27 +1,30 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Values.name }}
+  name: {{ .Values.deployment.name }}
 spec:
   selector:
     matchLabels:
-      {{- with .Values.selection_labels }}
-      {{- toYaml . | nindent 6 }}
-      {{- end }}
-  replicas: {{ .Values.replicas }}
+    {{- with .Values.deployment.selection_labels }}
+    {{- toYaml . | nindent 6 }}
+  {{- end }}
+  replicas: {{ .Values.deployment.replicas }}
   template:
     metadata:
       labels:
-        {{- with .Values.selection_labels }}
-        {{- toYaml . | nindent 8 }}
-        {{- end }}
-        {{- with .Values.labels }}
-        {{- toYaml . | nindent 8 }}
-        {{- end }}
+      {{- with .Values.deployment.selection_labels }}
+      {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.deployment.labels }}
+      {{- toYaml . | nindent 8 }}
+    {{- end }}
     spec:
+      {{- if .Values.serviceAccount.enabled}}
+      serviceAccountName: {{.Values.serviceAccount.name}}
+      {{- end }}
       containers:
-      - name: {{ .Values.name }}
-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        ports:
-        - containerPort: 8080
-          protocol: TCP
+        - name: {{ .Values.deployment.name }}
+          image: "{{ .Values.deployment.image.repository }}:{{ .Values.deployment.image.tag }}"
+          ports:
+            - containerPort: 8080
+              protocol: TCP
