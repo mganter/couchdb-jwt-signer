@@ -30,4 +30,4 @@ jobs:
       - uses: actions/upload-artifact@master
         with:
           name: chart
-          path: zip
+          path: deploy/helm/chart.zip
