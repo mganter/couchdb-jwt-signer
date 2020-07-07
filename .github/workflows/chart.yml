@@ -22,12 +22,12 @@ jobs:
       - uses: actions/checkout@v1
       - run: mkdir zip
       - uses: actions/checkout@master
-      - name: Archive Release
-        uses: thedoctor0/zip-release@master
-        with:
-          directory: 'deploy/helm'
-          filename: 'chart.zip'
+      #- name: Archive Release
+      #  uses: thedoctor0/zip-release@master
+      #  with:
+      #    directory: 'deploy/helm'
+      #    filename: 'chart.zip'
       - uses: actions/upload-artifact@master
         with:
           name: chart
-          path: deploy/helm/chart.zip
+          path: deploy/helm/
