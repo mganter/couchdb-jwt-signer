@@ -21,9 +21,12 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - run: mkdir zip
-      - uses: montudor/action-zip@v0.1.0
+      - uses: actions/checkout@master
+      - name: Archive Release
+        uses: thedoctor0/zip-release@master
         with:
-          args: zip -qq -r ./zip/chart.zip ./deploy/helm
+          directory: 'deploy/helm'
+          filename: 'zip/chart.zip'
       - uses: actions/upload-artifact@master
         with:
           name: chart
