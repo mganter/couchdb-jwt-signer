@@ -20,7 +20,6 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - uses: actions/checkout@v1
-      - run: composer install --ansi --no-progress --no-interaction --prefer-dist
       - run: mkdir zip
       - uses: montudor/action-zip@v0.1.0
         with:
