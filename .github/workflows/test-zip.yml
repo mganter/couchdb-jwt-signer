@@ -27,5 +27,4 @@ jobs:
       - name: Archive using zip or tar
         uses: NSCoder/archive-action@v1.0.0
         with:
-          #args: "tar czvf chart.tar.gz --transform 's,^deploy/helm,,' deploy/helm/*"
-          args: ls deploy/helm
+          args: 'tar czvf chart.tar.gz --transform="s#deploy/helm/##" deploy/helm'
