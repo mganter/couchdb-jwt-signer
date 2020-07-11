@@ -24,16 +24,10 @@ jobs:
         with:
           name: chart
           path: deploy/helm/
-      - name: Archive Release
-        uses: nguyenquyhy/zip-release@v0.3.0
-        with:
-          filename: 'chart.zip'
-          workingDirectory: ./deploy/helm/
-          path:  .
       - name: Archive using zip or tar
         uses: NSCoder/archive-action@v1.0.0
         with:
-          args: tar czvf chart.tar.gz --transform 's,^deploy/helm,,' deploy/helm/*
+          args: "tar czvf chart.tar.gz --transform 's,^deploy/helm,,' deploy/helm/*"
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
