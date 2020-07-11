@@ -29,7 +29,7 @@ spec:
           {{- with .Values.deployment.env}}
           {{- range $key, $value := . }}
           - name: {{ $key }}
-            value: {{$value}}
+            value: {{ $value | quote }}
           {{- end}}
           {{- end}}
           ports:
