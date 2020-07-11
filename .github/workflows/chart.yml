@@ -25,12 +25,11 @@ jobs:
           name: chart
           path: deploy/helm/
       - name: Archive Release
-        uses: thedoctor0/zip-release@master
+        uses: thedoctor0/zip-release@0.4.1
         with:
           filename: 'chart.zip'
           workingDirectory: ./deploy/helm/
           path:  ./deploy/helm
-  
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
